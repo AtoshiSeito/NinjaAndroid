@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ninja</string>
+    <string-array name="LevelNames">
+        <item>+1</item>
+        <item>+10</item>
+        <item>Макс</item>
+    </string-array>
+</resources>
