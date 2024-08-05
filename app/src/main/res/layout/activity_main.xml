@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     tools:context=".MainActivity">
 
 
@@ -15,12 +14,79 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/tapOnScreen"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/transparent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:srcCompat="@drawable/bg2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0">
+
+                    <ImageView
+                        android:id="@+id/SoldierOnMap"
+                        android:layout_width="160dp"
+                        android:layout_height="220dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginBottom="70dp"
+                        android:src="@drawable/soldier_left"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/myNinjaOnMap"
+                        tools:ignore="ContentDescription,MissingConstraints" />
+
+                    <ImageView
+                        android:id="@+id/myNinjaOnMap"
+                        android:layout_width="151dp"
+                        android:layout_height="220dp"
+                        android:layout_marginBottom="70dp"
+                        android:src="@drawable/ninja_stop_right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="ContentDescription,MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/tapOnScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                tools:layout_editor_absoluteX="361dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/frameLayout"
@@ -100,33 +166,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         tools:ignore="HardcodedText" />
-
-    <ImageView
-        android:id="@+id/SoldierOnMap"
-        android:layout_width="0dp"
-        android:layout_height="214dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/soldier_left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/myNinjaOnMap"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/myNinjaOnMap"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginEnd="99dp"
-        android:src="@drawable/ninja_stop_right"
-        app:layout_constraintBottom_toBottomOf="@+id/SoldierOnMap"
-        app:layout_constraintEnd_toStartOf="@+id/SoldierOnMap"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SoldierOnMap"
-        tools:ignore="ContentDescription,MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

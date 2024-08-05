@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId = "com.example.ninja"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 3
-        versionName = "1.1"
+        targetSdk = 31
+        versionCode = 4
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

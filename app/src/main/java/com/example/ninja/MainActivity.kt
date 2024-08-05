@@ -13,9 +13,12 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -54,6 +57,7 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
     private var moneyToWtch: Long = money
     private var flaganim = false
     private lateinit var prefs: SharedPreferences
+    private lateinit var layout: ConstraintLayout
 
 
 
@@ -119,6 +123,7 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
 
         window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
 
+        layout = findViewById(R.id.mans)
         myNinjaOnMap = findViewById(R.id.myNinjaOnMap)
         soldierOnMap = findViewById(R.id.SoldierOnMap)
         tapOnScreen = findViewById(R.id.tapOnScreen)
@@ -142,8 +147,8 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
 
             override fun onAnimationRepeat(p0: Animation?) {
             }
-
         })
+
 
         prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
 
@@ -154,6 +159,7 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
         moneyText.text = "$moneyToWtch $antars ан."
 
         tapOnScreen.setOnClickListener {
+            addPowerTxt()
             if (!flaganim) {
                 flaganim = true
                 myNinjaOnMap.startAnimation(inAnimation)
@@ -170,6 +176,28 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
         gift.setOnClickListener {
             showAd()
         }
+    }
+
+    private fun addPowerTxt(){
+        var powerTxt = TextView(this)
+        powerTxt.translationX = (soldierOnMap.x + soldierOnMap.width/2)
+        powerTxt.translationY = (soldierOnMap.y - 50)
+        powerTxt.textSize = 25F
+        powerTxt.text = "$power"
+        layout.addView(powerTxt)
+        var powerTxtAnimation = AnimationUtils.loadAnimation(this, R.anim.power_txt)
+        powerTxtAnimation.setAnimationListener(object: AnimationListener{
+            override fun onAnimationStart(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                layout.removeView(powerTxt)
+            }
+
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+        })
+        powerTxt.startAnimation(powerTxtAnimation)
     }
 
     @Deprecated("This method has been deprecated in favor of using the Activity Result API\n      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt\n      contracts for common intents available in\n      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for\n      testing, and allow receiving results in separate, testable classes independent from your\n      activity. Use\n      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}\n      with the appropriate {@link ActivityResultContract} and handling the result in the\n      {@link ActivityResultCallback#onActivityResult(Object) callback}.")
@@ -296,7 +324,8 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
                 override fun onRewarded(reward: Reward) {
                     // Called when the user can be rewarded.
                     money+=10000
-                    moneyText.text = "$money ан."
+                    calcAntars()
+                    moneyText.text = "$moneyToWtch $antars ан."
                     global.setMoney(money)
                 }
             })
@@ -317,12 +346,12 @@ class MainActivity() : AppCompatActivity(), Parcelable, AnimationListener {
     }
 
     private fun calcAntars(){
-        if (money/10000000000>0) {
+        if (money/1000000000>0) {
             antars = "млрд."
-            moneyToWtch = money/1000000000
-        } else if (money/10000000>0) {
+            moneyToWtch = money/100000000
+        } else if (money/1000000>0) {
             antars = "млн."
-            moneyToWtch = money/1000000
+            moneyToWtch = money/100000
         } else if (money/10000>0) {
             antars = "тыс."
             moneyToWtch = money/1000

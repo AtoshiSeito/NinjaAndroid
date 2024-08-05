@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ninja</string>
+    <string name="app_name">Ниндзя Асхарии</string>
     <string-array name="LevelNames">
         <item>+1</item>
         <item>+10</item>
